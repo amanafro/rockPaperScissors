@@ -14,17 +14,17 @@
         <h1 class="font-mono font-extrabold text-3xl">Rock Paper Scissors</h1>
 
         <div>
-            <button id="rock-button">
-                <img src="assets/rock-emoji.png" alt="rock-emoji" class="hover:bg-zinc-500 w-40 rounded-full p-4">
+            <button id="rock-button" onclick="playerMove('rock')">
+                <img src="assets/rock-emoji.png" alt="rock-emoji" class="hover:bg-zinc-500 w-32 rounded-2xl p-4">
             </button>
 
-            <button id="paper-button">
-                <img src="assets/paper-emoji.png" alt="paper-emoji" class="hover:bg-zinc-500 w-40 rounded-full p-4">
+            <button id="paper-button" onclick="playerMove('paper')">
+                <img src="assets/paper-emoji.png" alt="paper-emoji" class="hover:bg-zinc-500 w-32 rounded-2xl p-4">
             </button>
 
-            <button id="scissors-button">
+            <button id="scissors-button " onclick="playerMove('scissors')">
                 <img src="assets/scissors-emoji.png" alt="scissors-emoji"
-                    class="hover:bg-zinc-500 w-40 rounded-full p-4">
+                    class="hover:bg-zinc-500 w-32 rounded-2xl p-4">
             </button>
         </div>
 
@@ -43,7 +43,7 @@
         </div>
     </main>
 
-    <script type="module" src="main.js"></script>
+    <script defer src="main.js"></script>
 </body>
 
 </html>
