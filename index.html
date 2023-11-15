@@ -14,15 +14,15 @@
         <h1 class="font-mono font-extrabold text-3xl">Rock Paper Scissors</h1>
 
         <div>
-            <button id="rock-button" onclick="playerMove('rock')">
+            <button id="rock-button">
                 <img src="assets/rock-emoji.png" alt="rock-emoji" class="hover:bg-zinc-500 w-32 rounded-2xl p-4">
             </button>
 
-            <button id="paper-button" onclick="playerMove('paper')">
+            <button id="paper-button">
                 <img src="assets/paper-emoji.png" alt="paper-emoji" class="hover:bg-zinc-500 w-32 rounded-2xl p-4">
             </button>
 
-            <button id="scissors-button " onclick="playerMove('scissors')">
+            <button id="scissors-button">
                 <img src="assets/scissors-emoji.png" alt="scissors-emoji"
                     class="hover:bg-zinc-500 w-32 rounded-2xl p-4">
             </button>
@@ -30,11 +30,7 @@
 
         <div class="grid place-items-center bg-black w-60 h-36 text-cyan-100 rounded-2xl shadow-2xl ">
             <p id="score-message"></p>
-            <button id="reset" class="bg-slate-400 h-12 w-20 rounded-lg shadow-2xl place-items-center" onclick="
-                score.wins = 0;
-                score.loses = 0;
-                score.draws = 0;
-            ">Reset</button>
+            <button id="reset" class="bg-slate-400 h-12 w-20 rounded-lg shadow-2xl place-items-center">Reset</button>
 
         </div>
 

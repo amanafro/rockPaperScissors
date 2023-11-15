@@ -1,83 +1,73 @@
-//Defining Constants
-const ROCK = "rock";
-const PAPER = "paper";
-const SCISSORS = "scissors";
+// Defining Constants
+const moves = {
+  rock: "rock",
+  paper: "paper",
+  scissors: "scissors",
+};
 
-//Linking to the HTLM
+const score = {
+  wins: 0,
+  loses: 0,
+  draws: 0,
+};
+
+// Linking to the HTML
 const rockbtn = document.getElementById("rock-button");
 const paperbtn = document.getElementById("paper-button");
 const scissorsbtn = document.getElementById("scissors-button");
-const restbtn = document.getElementById("reset")
+const resetbtn = document.getElementById("reset");
 
 const resultMessage = document.getElementById("result-message");
-const scoreMessage = document.getElementById("score-message")
+const scoreMessage = document.getElementById("score-message");
 
+resetbtn.addEventListener("click", resetScore);
 
-rockbtn.addEventListener("click", () => playerMove(ROCK));
-paperbtn.addEventListener("click", () => playerMove(PAPER));
-scissorsbtn.addEventListener("click", () => playerMove(SCISSORS));
-
-//This will be the score store
-  const score = {
-  wins: 0,
-  loses: 0,
-  draws: 0
-};
-
-//This is the constant which will store the user input result
-const playerResult = playerInputResult()
-  
-function playerInputResult(input) {
-  return input
+function resetScore() {
+  score.wins = 0;
+  score.loses = 0;
+  score.draws = 0;
+  scoreMessage.textContent = `Wins: ${score.wins}, Losses: ${score.loses}, Draws: ${score.draws}`;
 }
 
-//This is what the player will input
-function playerMove(playerMove) {
-  const bot = botMove();
+rockbtn.addEventListener("click", () => playerMove(moves.rock));
+paperbtn.addEventListener("click", () => playerMove(moves.paper));
+scissorsbtn.addEventListener("click", () => playerMove(moves.scissors));
 
-  let result = "";
+function playerMove(playerChoice) {
+  const botChoice = botMove();
 
-  if (bot === playerMove) {
-    result = "It's a tie";
+  if (playerChoice === botChoice) {
+    result = "tied";
+    score.draws++;
   } else if (
-    (bot === PAPER && playerMove === ROCK) ||
-    (bot === SCISSORS && playerMove === PAPER) ||
-    (bot === ROCK && playerMove === SCISSORS)
+    (playerChoice === moves.rock && botChoice === moves.paper) ||
+    (playerChoice === moves.scissors && botChoice === moves.rock) ||
+    (playerChoice === moves.paper && botChoice === moves.scissors)
   ) {
-    result = "You lose";
+    result = "lost";
+    score.loses++;
   } else {
-    result = "You win";
+    result = "win";
+    score.wins++;
   }
 
-  //TODO: -Do some conditional rendering to show the icons of the bot move 
-  resultMessage.textContent = `You picked ${playerMove}. The bot picked ${bot}, so ${result}`;
+  resultMessage.textContent = `You picked ${playerChoice}. The bot picked ${botChoice}. You ${result}`;
+  scoreMessage.textContent = `Wins: ${score.wins}, Losses: ${score.loses}, Draws: ${score.draws}`;
 
-  if (result === "You win") {
-      score.wins += 1;
-  } else if (result === "You lose") {
-      score.losses += 1;
-  } else if (result === "It's a tie") {
-      score.ties += 1;
-  }
-
-  localStorage.setItem('score', JSON.stringify(score));
-
-  scoreMessage.textContent = `Wins: ${score.wins}, Loses: ${score.loses}, Draws: ${score.draws}`;
-  
+  return result;
 }
 
-//This function will generate the bot result and return it
 function botMove() {
-  const randomNumber = Math.random();
+  let bot = "";
+  const chose = Math.random();
 
-  let botMove = "";
-
-  if (randomNumber >= 0 && randomNumber < 1 / 3) {
-    botMove = "rock";
-  } else if (randomNumber >= 1 / 3 && randomNumber < 2 / 3) {
-    botMove = "paper";
+  if (chose > 0 && chose < 0.33) {
+    bot = moves.paper;
+  } else if (chose >= 0.33 && chose < 0.67) {
+    bot = moves.rock;
   } else {
-    botMove = "scissors";
+    bot = moves.scissors;
   }
-  return botMove;
+
+  return bot;
 }
